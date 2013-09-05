@@ -1,0 +1,18 @@
+{% extends "_layout.html" %}
+{% block body %}
+<header>
+	<span id="title">On Time</span><span id="name">@{{ current_user.name }}</span>
+	<p>Schedule your status to be tweeted at a certain time or something, blah.</p>
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	<ul class="flashes">
+		{% for message in messages %}
+		<li>{{ message }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	{% endwith %}
+</header>
+<section id="tweet">
+</section>
+{% endblock %}

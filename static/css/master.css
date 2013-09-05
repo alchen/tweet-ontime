@@ -1,0 +1,20 @@
+#wrapper {
+	margin: 2rem;
+}
+
+#title, #login, #name {
+	padding: .5rem;
+	vertical-align: bottom;
+}
+
+#title {
+	background-color: #000;
+	color: #fff;
+	border: 1px solid #000;
+}
+
+#login, #name {
+	border: 1px dashed #000;
+	margin-left: -1px;
+	color: #000;
+}

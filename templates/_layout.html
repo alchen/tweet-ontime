@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>  
+  <title>On Time</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/2.1.0/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/master.css') }}" />
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div id="wrapper">
+  <a name="top" id="top"></a>
+  {%- block body %}{% endblock -%}
+  </div>
+</body>
+</html>
