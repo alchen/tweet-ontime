@@ -1,3 +1,4 @@
+import tasks
 from ontime import app, twitter, db, login_manager
 from flask import render_template, request, flash, redirect, url_for
 from flask.ext.login import login_required, login_user, logout_user
@@ -97,4 +98,3 @@ def oauth_authorized(resp):
     return redirect(next_url)
 
 db.create_all()
-
