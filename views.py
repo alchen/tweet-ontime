@@ -51,6 +51,7 @@ def schedule():
         args=[get_twitter_token(), request.form['status']],
         countdown=countdown
     )
+    flash('Tweet successfully scheduled.')
     return redirect('/')
 
 
