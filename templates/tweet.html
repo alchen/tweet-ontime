@@ -16,15 +16,29 @@
 <section id="tweet">
 <script>
 $(function() {
-$( "#datepicker" ).datepicker();
-$( "#hour" ).slider();
-$( "#minute" ).slider();
+	function pad(number, length){
+	    var str = "" + number
+	    while (str.length < length) {
+	        str = '0'+str
+	    }
+	    return str
+	}
+	var offset = new Date().getTimezoneOffset()
+	offset = ((offset<0? '+':'-')+ // Note the reversed sign!
+	          pad(parseInt(Math.abs(offset/60)), 2)+
+	          pad(Math.abs(offset%60), 2));
+	$('#timezone').val(offset);
+	$( "#datepicker" ).datepicker({altField: "#date"});
+	$( "#hour" ).slider();
+	$( "#minute" ).slider();
 });
 </script>
-</head>
-<body>
+<form method="post" action="{{ url_for('schedule') }}">
+<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}" />
+<input type="hidden" name="date" id="date" />
+<input type="hidden" name="timezone" id="timezone" />
 <div id="left">
-	<textarea id="status"></textarea><br />
+	<textarea name="status" id="status"></textarea><br />
 	<select name="time" id="time">
 		<option value="12:00">12:00</option>
 		<option value="12:15">12:15</option>
@@ -90,43 +104,11 @@ $( "#minute" ).slider();
 		<option value="AM">AM</option>
 		<option value="PM">PM</option>
 	</select>
-	<select name="timezone" id="timezone">
-		<option value="-12.0">GMT -12:00</option>
-		<option value="-11.0">GMT -11:00</option>
-		<option value="-10.0">GMT -10:00</option>
-		<option value="-9.0">GMT -9:00</option>
-		<option value="-8.0">GMT -8:00</option>
-		<option value="-7.0">GMT -7:00</option>
-		<option value="-6.0">GMT -6:00</option>
-		<option value="-5.0">GMT -5:00</option>
-		<option value="-4.0">GMT -4:00</option>
-		<option value="-3.5">GMT -3:30</option>
-		<option value="-3.0">GMT -3:00</option>
-		<option value="-2.0">GMT -2:00</option>
-		<option value="-1.0">GMT -1:00</option>
-		<option value="0.0">GMT</option>
-		<option value="1.0">GMT +1:00</option>
-		<option value="2.0">GMT +2:00</option>
-		<option value="3.0">GMT +3:00</option>
-		<option value="3.5">GMT +3:30</option>
-		<option value="4.0">GMT +4:00</option>
-		<option value="4.5">GMT +4:30</option>
-		<option value="5.0">GMT +5:00</option>
-		<option value="5.5">GMT +5:30</option>
-		<option value="5.75">GMT +5:45</option>
-		<option value="6.0">GMT +6:00</option>
-		<option value="7.0">GMT +7:00</option>
-		<option value="8.0">GMT +8:00</option>
-		<option value="9.0">GMT +9:00</option>
-		<option value="9.5">GMT +9:30</option>
-		<option value="10.0">GMT +10:00</option>
-		<option value="11.0">GMT +11:00</option>
-		<option value="12.0">GMT +12:00</option>
-	</select>
 </div>
 <div id="right">
 	<div id="datepicker"></div>
 	<input id="submit" type="submit" />
 </div>
+</form>
 </section>
 {% endblock %}

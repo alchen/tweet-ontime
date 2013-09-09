@@ -1,4 +1,7 @@
 import tasks
+import pytz
+from datetime import datetime
+from dateutil import parser
 from ontime import app, twitter, db, login_manager
 from flask import render_template, request, flash, redirect, url_for
 from flask.ext.login import login_required, login_user, logout_user
@@ -33,6 +36,22 @@ def show_index():
         return render_template('tweet.html')
     else:
         return render_template('prompt.html')
+
+
+@app.route('/schedule', methods=['POST'])
+def schedule():
+    date_str = (request.form['date'] + ' ' +
+                request.form['time'] +
+                request.form['ampm'] + ' ' +
+                request.form['timezone'])
+    eta = parser.parse(date_str)
+    countdown = (eta.astimezone(pytz.utc) - datetime.now(pytz.utc)).\
+        total_seconds()
+    tasks.update.apply_async(
+        args=[get_twitter_token(), request.form['status']],
+        countdown=countdown
+    )
+    return redirect('/')
 
 
 @login_manager.user_loader

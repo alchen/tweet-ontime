@@ -22,7 +22,7 @@ def get_twitter_token(token=None):
 
 
 @celery.task(ignore_result=True)
-def update(user_id, oauth_token, status):
+def update(oauth_token, status):
     twitter.post('statuses/update.json', data={'status': status},
                  token=oauth_token)
     return
