@@ -1,7 +1,7 @@
 {% extends "_layout.html" %}
 {% block body %}
 <header>
-	<span id="title">On Time</span><span id="name">@{{ current_user.name }}</span>
+	<span id="title">On Time</span><span id="name">@{{ current_user.name }}</span><span id="logout"><a href="{{ url_for('logout') }}">log out</a></span>
 	<p>Schedule your status to be tweeted at a certain time or something, blah.</p>
 	{% with messages = get_flashed_messages() %}
 	{% if messages %}

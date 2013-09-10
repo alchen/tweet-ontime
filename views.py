@@ -114,7 +114,6 @@ def oauth_authorized(resp):
 
     login_user(this_account)
 
-    flash('You are now signed in as %s' % resp['screen_name'])
     return redirect(next_url)
 
 db.create_all()
