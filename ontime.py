@@ -4,6 +4,14 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from flask.ext.oauth import OAuth
 from flask.ext.seasurf import SeaSurf
+try:
+    import gevent
+    from gevent.monkey import patch_all
+    patch_all()
+    from psycogreen.gevent import patch_psycopg
+    patch_psycopg()
+except:
+    pass
 
 app = Flask(__name__)
 
